@@ -14,7 +14,7 @@
 
 </head>
 <body>
-	<div id="wrapper">
+	<div id="homeWrapper">
 	
 		
 		<a class="" href="/home"> Welcome <c:out value="${loginUser.name}" /></a>
