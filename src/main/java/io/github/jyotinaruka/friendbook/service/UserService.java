@@ -6,16 +6,24 @@ import java.util.Optional;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 
+import io.github.jyotinaruka.friendbook.model.Comment;
+import io.github.jyotinaruka.friendbook.model.Post;
 import io.github.jyotinaruka.friendbook.model.User;
+import io.github.jyotinaruka.friendbook.repositories.CommentRepository;
+import io.github.jyotinaruka.friendbook.repositories.PostRepository;
 import io.github.jyotinaruka.friendbook.repositories.UserRepository;
 
 
 @Service
 public class UserService {
 	private final UserRepository userRepository;
+	private final PostRepository postRepository;
+	private final CommentRepository commentRepository;
 
-	public UserService(UserRepository userRepository) {
+	public UserService(UserRepository userRepository, PostRepository postRepository, CommentRepository commentRepository) {
 		this.userRepository = userRepository;
+		this.postRepository = postRepository;
+		this.commentRepository = commentRepository;
 	}
 
 	// register user and hash their password
@@ -61,5 +69,28 @@ public class UserService {
 	public List<User> findAll() {
 		return userRepository.findAll();
 	}
-
+	
+	public List<Post> allPosts(){
+		return (List<Post>) postRepository.findAll();
+	}
+	
+	public List<Comment> allComments(){
+		return (List<Comment>) commentRepository.findAll();
+	}
+	
+	public Post createPost(Post post) {
+		return postRepository.save(post);
+	}
+	
+	public Post savePost(Post post) {
+		return postRepository.save(post);
+	}
+	
+	public Comment createComment(Comment comment) {
+		return commentRepository.save(comment);
+	}
+	
+	public Comment saveComment(Comment comment) {
+		return commentRepository.save(comment);
+	}
 }
