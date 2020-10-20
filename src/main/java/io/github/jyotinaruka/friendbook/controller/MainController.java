@@ -1,16 +1,22 @@
 package io.github.jyotinaruka.friendbook.controller;
 
-import javax.validation.Valid;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import io.github.jyotinaruka.friendbook.model.Comment;
 import io.github.jyotinaruka.friendbook.model.Post;
+import io.github.jyotinaruka.friendbook.model.User;
 import io.github.jyotinaruka.friendbook.service.UserService;
 
 @Controller
@@ -20,14 +26,65 @@ public class MainController {
 	private UserService userService;
 	
 	@GetMapping("/home")
-	public String homePage(Model model) {
-		userService.allPosts();
-		userService.allComments();
+	public String homePage(Model model, HttpSession session, @ModelAttribute("post")Post post) {
+		Long userId=(Long) session.getAttribute("user_id");
+        User u = userService.findUserById(userId);
+        model.addAttribute("user", u);
+		model.addAttribute("allPosts", userService.allPosts());
+		model.addAttribute("allComments", userService.allComments());
+		
+		SimpleDateFormat dateformat = new SimpleDateFormat("EEEE',' 'the' d 'of' MMMM ',' yyyy");
+		
+		String localDate = dateformat.format(new Date());
+		
+		model.addAttribute("date", localDate);
+		
+		SimpleDateFormat timeformat = new SimpleDateFormat("h:mm a");
+		
+		String localTime = timeformat.format(new Date());
+		model.addAttribute("time", localTime);
+		
+		model.addAttribute(post);
+		
+		
 		return "home.jsp";
 	}
 	@PostMapping("/home")
-	public String home(@Valid @ModelAttribute("post")Post post, Model model, BindingResult result) {
-		userService.createPost(post);
+	public String home( @RequestParam("post")String post, Model model, HttpSession session,Long id) {
+		Long userId=(Long) session.getAttribute("user_id");
+        User u = userService.findUserById(userId);
+        
+       
+        Post post1 = new Post();
+        post1.setMessage(post);
+        
+        post1.setPostedBy(u);
+        userService.savePost(post1);
+        
+       
+        
+		model.addAttribute("allPosts", userService.allPosts());
+		model.addAttribute("allComments", userService.allComments());
+		//userService.createComment(comment,((userService.findPost(id))));
+		
+		
+		
 		return "redirect:/home";
 	}
+
+	@PostMapping("/comment/{id}")
+	public String comment(@RequestParam("message")String comment, Model model, HttpSession session, @PathVariable("id")Long id) {
+		Long userId=(Long) session.getAttribute("user_id");
+        User u = userService.findUserById(userId);
+        
+        Comment comment1= new Comment();
+        comment1.setPost(userService.findPost(id));
+        userService.saveComment(comment1);
+        
+        return "redirect:/home";
+        
+        
+        
+	}
+	
 }
