@@ -1,6 +1,7 @@
 package io.github.jyotinaruka.friendbook.model;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,21 +11,28 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="posts")
 public class Post {
+	
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
+    private String message;
+    
+    @OneToMany(mappedBy = "post", fetch = FetchType.LAZY)
+    private List<Comment> comments;
+    
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "posted_by_user_id")
+    private User postedBy;
+    
     @Column(updatable=false)
     private Date createdAt;
     private Date updatedAt;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="post_id")
-    private Comment comment;
     
     public Post() {
         
@@ -38,12 +46,28 @@ public class Post {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getMessage() {
+		return message;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
+	public List<Comment> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
+	}
+
+	public User getPostedBy() {
+		return postedBy;
+	}
+
+	public void setPostedBy(User postedBy) {
+		this.postedBy = postedBy;
 	}
 
 	public Date getCreatedAt() {
@@ -62,12 +86,4 @@ public class Post {
 		this.updatedAt = updatedAt;
 	}
 
-	public Comment getComment() {
-		return comment;
-	}
-
-	public void setComment(Comment comment) {
-		this.comment = comment;
-	}
-    
 }

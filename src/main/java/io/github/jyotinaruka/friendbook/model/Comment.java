@@ -15,17 +15,24 @@ import javax.persistence.Table;
 @Entity
 @Table(name="comments")
 public class Comment {
+	
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
+    private String message;
+        
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="commented_on_post_id")
+    private Post post;
+    
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="commented_by_user_id")
+    private User commentedBy;
+    
     @Column(updatable=false)
     private Date createdAt;
     private Date updatedAt;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="post_id")
-    private Post post;
-    
+
     public Comment() {
         
     }
@@ -38,12 +45,28 @@ public class Comment {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getMessage() {
+		return message;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
+	public Post getPost() {
+		return post;
+	}
+
+	public void setPost(Post post) {
+		this.post = post;
+	}
+
+	public User getCommentedBy() {
+		return commentedBy;
+	}
+
+	public void setCommentedBy(User commentedBy) {
+		this.commentedBy = commentedBy;
 	}
 
 	public Date getCreatedAt() {
@@ -60,14 +83,6 @@ public class Comment {
 
 	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
-	}
-
-	public Post getPost() {
-		return post;
-	}
-
-	public void setPost(Post post) {
-		this.post = post;
 	}
     
 }
