@@ -4,11 +4,14 @@ package io.github.jyotinaruka.friendbook.model;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
@@ -27,6 +30,11 @@ public class User {
 	
 	@Size(min = 3, message = "Name must be greater than 3 characters.")
 	private String name;
+	
+	
+	@OneToOne(mappedBy="user", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	private UserProfile profile;
+	
 	
 	@Email(message = "Email must be valid.")
 	@NotBlank(message = "Email is required.")
@@ -71,6 +79,14 @@ public class User {
 		this.name = name;
 	}
 
+	public UserProfile getProfile() {
+		return profile;
+	}
+	
+	public void setProfile(UserProfile profile) {
+		this.profile = profile;
+	}
+	
 	public String getEmail() {
 		return email;
 	}
