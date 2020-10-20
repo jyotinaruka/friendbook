@@ -16,19 +16,27 @@
 <body>
 	<div id="wrapper">
 
+		<div>
+			<img src="img/logo1.png" alt="" />
+		</div>
 		<div id="bg-register" class="row">
+
+
 			<div class="col mx-2">
+
 				<h2 class="text-center">Register</h2>
+
+
 
 				<div class="form-group row">
 					<p class="col text-danger">
 						<form:errors path="registerUser.*" />
 					</p>
 				</div>
-				<form:form method="POST" action="/register" modelAttribute="registerUser">
+				<form:form method="POST" action="/register"
+					modelAttribute="registerUser">
 					<div class="form-group row ">
-						<form:label path="name"
-							cssClass="col-sm-4 col-form-label">Name:</form:label>
+						<form:label path="name" cssClass="col-sm-4 col-form-label">Name:</form:label>
 						<div class="col-sm">
 							<form:input path="name" cssClass="form-control" />
 						</div>
@@ -40,15 +48,14 @@
 						</div>
 					</div>
 					<div class="form-group row">
-						<form:label path="password"
-							cssClass="col-sm-4 col-form-label">Password:</form:label>
+						<form:label path="password" cssClass="col-sm-4 col-form-label">Password:</form:label>
 						<div class="col-sm">
 							<form:password path="password" cssClass="form-control" />
 						</div>
 					</div>
 					<div class="form-group row">
 						<form:label path="passwordConfirmation"
-							cssClass="col-sm-4 col-form-label">Password Conf:</form:label>
+							cssClass="col-sm-4 col-form-label"> Confirm Pwd:</form:label>
 						<div class="col-sm">
 							<form:password path="passwordConfirmation"
 								cssClass="form-control" />
@@ -78,8 +85,7 @@
 						</div>
 					</div>
 					<div class="form-group row">
-						<form:label path="password"
-							cssClass="col-sm-3 col-form-label">Password:</form:label>
+						<form:label path="password" cssClass="col-sm-3 col-form-label">Password:</form:label>
 						<div class="col-sm">
 							<form:password path="password" cssClass="form-control" />
 						</div>
