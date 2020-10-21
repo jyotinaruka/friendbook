@@ -28,12 +28,6 @@
 					<li class="nav-item "><a class="nav-link" href="/home">Home</a></li>
 					<li class="nav-item "><a class="nav-link" href="/logout">Logout</a></li>
 				</ul>
-				<span class="navbar-text">
-			      Today's Date is
-					<c:out value="${date}"></c:out>
-					and it is currently
-					<c:out value="${time}"></c:out>
-			    </span>
 			</div>
 			
 		</nav>

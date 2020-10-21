@@ -65,10 +65,16 @@ public class ProfileController {
 		model.addAttribute("loginUser", loginUser);
 
 		if (result.hasErrors()) {
+			model.addAttribute("editUserProfile", profile);
 			return "editProfile.jsp";
 		} else {
-			profile.setUser(loginUser);
-			userService.saveProfile(profile);
+			UserProfile p = loginUser.getProfile();
+			p = p == null ? new UserProfile() : p;
+			p.setBio(profile.getBio());
+			p.setEducation(profile.getEducation());
+			p.setCurrentCity(profile.getCurrentCity());
+			p.setUser(loginUser);
+			userService.saveProfile(p);
 			return "redirect:/profile";
 		}
 	}

@@ -12,6 +12,8 @@
 
 
 	<form:form action="/profile/edit" modelAttribute="editUserProfile" method="POST">
+		<form:hidden path="id"/>
+		<form:hidden path="user.id"/>
 	<div class="col mt-3">
 		<h1><c:out value="${loginUser.name}" /></h1>
 		
@@ -22,7 +24,7 @@
 		</div>
 		--%>
 		
-		<div class="alert alert-danger" role="alert">
+		<div class="bg-danger text-white" role="alert">
 			<form:errors path="editUserProfile.*"/>
 		</div>
 		
