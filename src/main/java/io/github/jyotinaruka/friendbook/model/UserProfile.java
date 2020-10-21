@@ -11,6 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "user_profile")
@@ -18,15 +20,18 @@ public class UserProfile {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	@Size(min = 10, max = 500)
 	private String bio;
+	@NotBlank
 	private String currentCity;
+	@NotBlank
 	private String education;
 
 	@Column(updatable = false)
 	private Date createdAt;
     private Date updatedAt;
 	
-	@OneToOne(mappedBy = "profile", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private User user;
 
 	public UserProfile() {
@@ -40,6 +45,7 @@ public class UserProfile {
 	public void setId(Long id) {
 		this.id = id;
 	}
+	
 
 	public String getBio() {
 		return bio;

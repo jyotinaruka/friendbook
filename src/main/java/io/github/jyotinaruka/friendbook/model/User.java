@@ -32,7 +32,7 @@ public class User {
 	private String name;
 	
 	
-	@OneToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@OneToOne(mappedBy = "user", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	private UserProfile profile;
 	
 	

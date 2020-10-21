@@ -90,9 +90,4 @@ public class MainController {
 
     return "redirect:/home";
   }
-
-  @GetMapping("/profilepage")
-  public String profile() {
-    return "profilePage.jsp";
-  }
 }

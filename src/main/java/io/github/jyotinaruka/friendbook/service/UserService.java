@@ -4,27 +4,32 @@ import java.util.List;
 import java.util.Optional;
 
 import org.mindrot.jbcrypt.BCrypt;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import io.github.jyotinaruka.friendbook.model.Comment;
 import io.github.jyotinaruka.friendbook.model.Post;
 import io.github.jyotinaruka.friendbook.model.User;
+import io.github.jyotinaruka.friendbook.model.UserProfile;
 import io.github.jyotinaruka.friendbook.repositories.CommentRepository;
 import io.github.jyotinaruka.friendbook.repositories.PostRepository;
+import io.github.jyotinaruka.friendbook.repositories.UserProfileRepository;
 import io.github.jyotinaruka.friendbook.repositories.UserRepository;
 
 
 @Service
 public class UserService {
-	private final UserRepository userRepository;
-	private final PostRepository postRepository;
-	private final CommentRepository commentRepository;
+	
+	@Autowired
+	private UserRepository userRepository;
+	@Autowired
+	private UserProfileRepository profileRepository;
+	@Autowired
+	private PostRepository postRepository;
+	@Autowired
+	private CommentRepository commentRepository;
 
-	public UserService(UserRepository userRepository, PostRepository postRepository, CommentRepository commentRepository) {
-		this.userRepository = userRepository;
-		this.postRepository = postRepository;
-		this.commentRepository = commentRepository;
-	}
+
 
 	// register user and hash their password
 	public User registerUser(User user) {
@@ -108,5 +113,9 @@ public class UserService {
 		} else {
 			return null;
 		}
+	}
+
+	public UserProfile saveProfile(UserProfile profile) {
+		return profileRepository.save(profile);
 	}
 }

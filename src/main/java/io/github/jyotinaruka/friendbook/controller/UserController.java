@@ -81,16 +81,6 @@ public class UserController {
 		}
 	}
 
-	@RequestMapping("/home")
-	public String home(HttpSession session, Model model) {
-		// check user_id in session, otherwise logout user
-		Long userId = (Long) session.getAttribute("user_id");
-		if(userId == null) { return "redirect:/logout"; }
-		User loginUser = userService.findUserById(userId);		
-		model.addAttribute("loginUser", loginUser);		
-		return "home.jsp";
-	}
-
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
 		session.invalidate();
