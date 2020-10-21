@@ -6,6 +6,10 @@ body {
 #wrapper {
 	width: 975px;
 	margin: 0 auto;
+	color: black !important;	
+}
+main {
+	min-height: 450px;
 }
 #bg-register {
 	margin: auto;
@@ -35,11 +39,11 @@ body {
 	font-size: 20px;
 }
 
-a {
+#bg-register a {
 	color: white;
 	text-decoration: none;
 }
-a:hover {
+#bg-register a:hover {
 	color: white;
 }
 
@@ -69,8 +73,11 @@ h2 {
 	color: white;
 }
 
-img{
+.reg_img{
 	width:200px;
 	height:auto;
 }
-
+.ico {
+	min-width: 20px;
+	text-align: center;
+}

@@ -30,4 +30,10 @@ public class MainController {
 		userService.createPost(post);
 		return "redirect:/home";
 	}
+	
+	@GetMapping("/profilepage")
+	public String profile() {
+		return "profilePage.jsp";
+	}
+	
 }

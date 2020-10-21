@@ -16,7 +16,7 @@
 <body>
 	<div id="wrapper">
 
-		<div>
+		<div class="reg_img">
 			<img src="img/logo1.png" alt="" />
 		</div>
 		<div id="bg-register" class="row">
