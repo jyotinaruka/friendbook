@@ -78,7 +78,8 @@ public class UserService {
 		return (List<Comment>) commentRepository.findAll();
 	}
 	
-	public Post createPost(Post post) {
+	public Post createPost(User setPostedBy, Post post) {
+		post.setPostedBy(setPostedBy);
 		return postRepository.save(post);
 	}
 	
@@ -86,11 +87,26 @@ public class UserService {
 		return postRepository.save(post);
 	}
 	
-	public Comment createComment(Comment comment) {
+	public Comment createComment(Comment comment, Post post) {
+		comment.setPost(post);
 		return commentRepository.save(comment);
 	}
 	
 	public Comment saveComment(Comment comment) {
 		return commentRepository.save(comment);
+	}
+	
+	public void addCommentToPost(Comment comment, Post post) {
+		comment.setPost(post);
+		commentRepository.save(comment);
+	}
+	public Post findPost(Long id) {
+		Optional<Post> p = postRepository.findById(id);
+
+		if (p.isPresent()) {
+			return p.get();
+		} else {
+			return null;
+		}
 	}
 }
