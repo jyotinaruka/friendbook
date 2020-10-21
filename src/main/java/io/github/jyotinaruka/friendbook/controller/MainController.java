@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+
 @Controller
 public class MainController {
   @Autowired
@@ -47,6 +48,7 @@ public class MainController {
     model.addAttribute("time", localTime);
 
     model.addAttribute(post);
+    model.addAttribute("findAll", userService.findAll());
 
     return "home.jsp";
   }
@@ -91,5 +93,16 @@ public class MainController {
     userService.saveComment(comment1);
 
     return "redirect:/home";
+  }
+  
+  @PostMapping("/like/{id}")
+  public String like(Model model, HttpSession session, @PathVariable("id")Long id) {
+	  	Long userId= (Long) session.getAttribute("user_id");
+	  	User u = userService.findUserById(userId);
+	  	
+	  	Post like = new Post();
+	  	like.setPostedBy(u);
+	  	userService.savePost(like);
+	  	return "redirect:/home";
   }
 }

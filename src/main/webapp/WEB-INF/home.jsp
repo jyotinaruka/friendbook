@@ -24,9 +24,14 @@
 		<c:forEach items="${allPosts }" var="post">
 			<div class="card my-3">
 			  <div class="card-body">
-			    <h6 class="card-subtitle mb-2 text-muted">Posted by <c:out value="${post.postedBy.name}" /></h6>
-			    <p class="card-text"><c:out value="${post.message}" /></p>
+			    <h6 class="card-subtitle mb-2 text-muted">Posted by <a href="/profile"><c:out value="${post.postedBy.name}" /></a><input type="submit" value="Like!"></h6>
+			    <p class="card-text"><c:out value="${post.message}" /><c:out value="${post.createdAt}"></c:out></p>
 			  </div>
+			    <c:forEach items="${post.getUsers() }" var="user">
+
+				<h3>People who liked this:<c:out value="${user.getName()}"></c:out></h3>
+
+				</c:forEach>
 		<c:forEach items="${post.comments}" var="comment">
 			  <div class="card-body">
 				  <div class="card p-2">
@@ -56,3 +61,10 @@
 </div>
 
 <%@include file="footer.jsp"%>
+
+<p>All Your Friends<p>
+<c:forEach items="${users.findAll }">
+<c:out value="${user.name }"/>
+</c:forEach>
+
+
