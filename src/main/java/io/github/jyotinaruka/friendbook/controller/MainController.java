@@ -29,12 +29,12 @@ public class MainController {
   ) {
     Long userId = (Long) session.getAttribute("user_id");
     User u = userService.findUserById(userId);
-    model.addAttribute("user", u);
+    model.addAttribute("loginUser", u);
     model.addAttribute("allPosts", userService.allPosts());
     model.addAttribute("allComments", userService.allComments());
 
     SimpleDateFormat dateformat = new SimpleDateFormat(
-      "EEEE',' 'the' d 'of' MMMM ',' yyyy"
+      "EEEE',' 'the' d 'of' MMMM',' yyyy"
     );
 
     String localDate = dateformat.format(new Date());
@@ -85,7 +85,9 @@ public class MainController {
     User u = userService.findUserById(userId);
 
     Comment comment1 = new Comment();
+    comment1.setMessage(comment);
     comment1.setPost(userService.findPost(id));
+    comment1.setCommentedBy(u);
     userService.saveComment(comment1);
 
     return "redirect:/home";

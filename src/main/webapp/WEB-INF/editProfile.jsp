@@ -22,9 +22,9 @@
 		</div>
 		--%>
 		
-		<p class="bg-danger text-white">
+		<div class="alert alert-danger" role="alert">
 			<form:errors path="editUserProfile.*"/>
-		</p>
+		</div>
 		
 		<h5>Intro</h5>
 		<p>
