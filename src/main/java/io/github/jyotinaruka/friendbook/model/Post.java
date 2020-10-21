@@ -14,6 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
 @Table(name="posts")
 public class Post {
@@ -31,6 +33,7 @@ public class Post {
     private User postedBy;
     
     @Column(updatable=false)
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date createdAt;
     private Date updatedAt;
     
@@ -85,5 +88,6 @@ public class Post {
 	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
 	}
+	
 
 }

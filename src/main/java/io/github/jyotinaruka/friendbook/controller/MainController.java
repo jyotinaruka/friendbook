@@ -96,13 +96,13 @@ public class MainController {
   }
   
   @PostMapping("/like/{id}")
-  public String like(Model model, HttpSession session, @PathVariable("id")Long id) {
+  public String like(Model model, HttpSession session, @PathVariable("id")Long id, @RequestParam(value="button")String button) {
 	  	Long userId= (Long) session.getAttribute("user_id");
 	  	User u = userService.findUserById(userId);
-	  	
-	  	Post like = new Post();
-	  	like.setPostedBy(u);
-	  	userService.savePost(like);
+	  	session.setAttribute("likes", 0);
+	  	if(button.equals("like")) {
+	  		int likeButton = +1;	
+	  	}
 	  	return "redirect:/home";
   }
 }
