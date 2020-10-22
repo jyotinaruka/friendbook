@@ -116,4 +116,10 @@ public class MainController {
 	  	session.setAttribute("likes", likes);
 	  	return "redirect:/home";
   }
+  
+  @PostMapping("/delete/{id}")
+  public String delete(@PathVariable("id")Long id){
+	  userService.deletePost(id);
+	  return "redirect:/home";
+  }
 }
