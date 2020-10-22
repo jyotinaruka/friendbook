@@ -32,7 +32,7 @@
 
 
 	<form:form action="/profile/edit" modelAttribute="editUserProfile"
-		method="POST">
+		method="POST" class="form-row">
 		<form:hidden path="id" />
 		<form:hidden path="user.id" />
 		<div class="col mt-3">
@@ -40,26 +40,29 @@
 				<c:out value="${loginUser.name}" />
 			</h1>
 
-			<div class="bg-danger text-white" role="alert">
-				<form:errors path="editUserProfile.*" />
-			</div>
+			
 
 			<h5>Intro</h5>
-			<p>
-				<form:textarea path="bio" cssClass="form-control" />
-			</p>
-			<p class="form-inline">
-				<i class="ico fas fa-graduation-cap"></i> Studied at &nbsp;
-				<form:input path="education" cssClass="form-control" />
-			</p>
-			<p  class="form-inline">
-				<i class="ico fas fa-map-marker-alt"></i> Lives in &nbsp;
-				<form:input path="currentCity" cssClass="form-control" />
-			</p>
-
-			<div class="form-inline">
-				<%--<a href="/message"><button class=" btn-linear  btn-secondary p-1">Message</button></a>--%>
-				<button type="submit" class=" btn-linear  btn-secondary p-1">Save</button>
+			<div class="input-group input-group-sm mb-3">
+				<form:textarea path="bio" cssClass="form-control" cssErrorClass="form-control is-invalid" />
+				<form:errors path="bio" element="div" cssClass="invalid-feedback" />
+			</div>
+			<div class="input-group input-group-sm mb-3">
+			  <div class="input-group-prepend">
+			    <span class="input-group-text"><i class="ico fas fa-graduation-cap"></i> Studied at</span>
+			  </div>
+			  <form:input path="education" cssClass="form-control" cssErrorClass="form-control is-invalid" />
+			  <form:errors path="education" element="div" cssClass="invalid-feedback" />
+			</div>
+			<div class="input-group input-group-sm mb-3">
+			  <div class="input-group-prepend">
+			    <span class="input-group-text"><i class="ico fas fa-map-marker-alt"></i> Lives in</span>
+			  </div>
+			  <form:input path="currentCity" cssClass="form-control" cssErrorClass="form-control is-invalid" />
+			  <form:errors path="currentCity" element="div" cssClass="invalid-feedback" />
+			</div>
+			<div>
+				<button type="submit" class="btn btn-secondary btn-sm">Save</button>
 			</div>
 		</div>
 	</form:form>
