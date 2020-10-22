@@ -43,6 +43,11 @@ public class PhotoController {
 		
 		
 		UserProfile profile = userService.getProfileForUser(userId);
+		if(profile == null) {
+			profile = new UserProfile();
+			profile.setUser(loginUser);
+		}
+		
 		String fileName = StringUtils.cleanPath(file.getOriginalFilename());
 		Path path = Paths.get(uploadDir, "userphotos/" + loginUser.getId());
  

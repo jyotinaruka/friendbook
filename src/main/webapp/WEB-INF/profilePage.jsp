@@ -26,9 +26,8 @@
 		
 		
 		<div class="form-inline">
-			<%-- <a href="/message"><button class=" btn-linear  btn-secondary p-1">Message</button></a>--%>
 			<c:if test="${loginUser.id == user.id}">
-			<a href="/profile/edit"><button class=" btn-linear  btn-secondary p-1">Edit</button></a>
+			<a href="/profile/edit"><button class="btn btn-secondary btn-sm">Edit</button></a>
 			</c:if>
 		</div>		
 	</div>
