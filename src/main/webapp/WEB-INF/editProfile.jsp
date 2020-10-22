@@ -7,7 +7,19 @@
 
 <div class="row">
 	<div class="col-4 mt-3">
-		<img src="/img/avatar.png" alt="" width="250" height="250" />
+		<img src='<c:out value="${loginUser.profile.profilePicPath}" />' onerror="javascript:this.src='/img/avatar.png'" class="rounded" width="250" height="250" />
+		
+		<form action="/photo/profilepic" method="POST" enctype="multipart/form-data">
+	    <table>
+	        <tr>
+	            <td><label for="profilePic">Select a file to upload</label></td>
+	            <td><input id="profilePic" name="profilePic" type="file" accept="image/png, image/jpeg" /></td>
+	        </tr>
+	        <tr>
+	            <td><button type="submit">Upload</button></td>
+	        </tr>
+	    </table>
+		</form>
 	</div>
 
 

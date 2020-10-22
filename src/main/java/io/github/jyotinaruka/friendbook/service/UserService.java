@@ -118,4 +118,8 @@ public class UserService {
 	public UserProfile saveProfile(UserProfile profile) {
 		return profileRepository.save(profile);
 	}
+	
+	public UserProfile getProfileForUser(Long userId) {
+		return profileRepository.findFirstByUserId(userId);
+	}
 }

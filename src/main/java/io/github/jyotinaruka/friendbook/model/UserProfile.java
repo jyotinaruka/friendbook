@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
@@ -26,6 +27,8 @@ public class UserProfile {
 	private String currentCity;
 	@NotBlank
 	private String education;
+	@Column(nullable = true)
+	private String picFileName;
 
 	@Column(updatable = false)
 	private Date createdAt;
@@ -70,6 +73,23 @@ public class UserProfile {
 	public void setEducation(String education) {
 		this.education = education;
 	}
+	
+	public String getPicFileName() {
+		return picFileName;
+	}
+	
+	public void setPicFileName(String picFileName) {
+		this.picFileName = picFileName;
+	}
+	
+    @Transient
+    public String getProfilePicPath() {
+        if (picFileName == null || user == null) {
+        	return "/img/avatar.png";
+        } else {
+        	return "/userphotos/" + user.getId() + "/" + picFileName;
+        }
+    }
 
 	public Date getCreatedAt() {
 		return createdAt;

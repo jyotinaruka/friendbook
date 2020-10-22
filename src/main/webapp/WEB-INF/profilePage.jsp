@@ -8,7 +8,7 @@
 
 <div class="row">
 	<div class="col-4 mt-3">
-		<img src="/img/avatar.png" alt="" width="250" height="250" />
+		<img src='<c:out value="${loginUser.profile.profilePicPath}" />'  onerror="javascript:this.src='/img/avatar.png'" class="rounded" alt="" width="250" height="250" />
 	</div>
 
 

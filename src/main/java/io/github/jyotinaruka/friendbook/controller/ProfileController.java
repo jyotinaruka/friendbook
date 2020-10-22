@@ -68,7 +68,7 @@ public class ProfileController {
 			model.addAttribute("editUserProfile", profile);
 			return "editProfile.jsp";
 		} else {
-			UserProfile p = loginUser.getProfile();
+			UserProfile p = userService.getProfileForUser(userId);
 			p = p == null ? new UserProfile() : p;
 			p.setBio(profile.getBio());
 			p.setEducation(profile.getEducation());
