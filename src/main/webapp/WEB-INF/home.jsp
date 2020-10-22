@@ -17,7 +17,7 @@
 				<div class="input-group">
 					<textarea name="post" class="form-control"></textarea>
 					<div class="input-group-append">
-						<button class="btn btn-outline-primary" type="submit">Post</button>
+						<button class="btn btn-outline-primary" type="submit"><i class="fas fa-paper-plane"></i> Post</button>
 					</div>
 				</div>
 			</form>
@@ -29,6 +29,7 @@
 					<h6 class="card-subtitle mb-2 text-muted">Posted by <a href="/profile/user/${post.postedBy.id}">
 							<c:out value="${post.postedBy.name}" /></a>
 						<pt:prettytime date="${post.createdAt}" />
+						<span class="float-right"><a href="/delete/${post.id}" class="text-danger"><i class="far fa-trash-alt"></i> Delete</a></span>
 					</h6>
 					<p class="card-text">
 						<c:out value="${post.message}" />
@@ -46,7 +47,7 @@
 					</div>
 				</div>
 
-				<a href="/delete/${post.id}">Delete</a>
+				
 
 				<c:forEach items="${post.comments}" var="comment">
 					<div class="card-body py-0 mb-2">
@@ -67,7 +68,7 @@
 						<div class="input-group">
 							<input name="message" class="form-control" />
 							<div class="input-group-append">
-								<button class="btn btn-outline-secondary" type="submit">Comment</button>
+								<button class="btn btn-outline-secondary" type="submit"><i class="far fa-comment"></i> Comment</button>
 							</div>
 						</div>
 					</form>
