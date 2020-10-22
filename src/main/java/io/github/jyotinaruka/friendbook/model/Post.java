@@ -89,5 +89,6 @@ public class Post {
 		this.updatedAt = updatedAt;
 	}
 	
+	
 
 }

@@ -122,4 +122,8 @@ public class UserService {
 	public UserProfile getProfileForUser(Long userId) {
 		return profileRepository.findFirstByUserId(userId);
 	}
+	
+	public void deletePost(Long id) {
+		postRepository.deleteById(id);
+	}
 }

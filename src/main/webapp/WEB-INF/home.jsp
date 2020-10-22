@@ -32,6 +32,7 @@
 			  <button type="submit" class="button" name="button" value="like">Like!</button>
 			  </form>
 			  <c:out value="${likeButton}"></c:out>
+			  <a href="/delete">Delete</a>
 			  
 		<c:forEach items="${post.comments}" var="comment">
 			  <div class="card-body">
