@@ -15,7 +15,7 @@
 				  <div class="input-group">
 				    <textarea name="post" class="form-control"></textarea>
 				    <div class="input-group-append">
-				       <button class="btn btn-outline-secondary" type="submit">Post</button>
+				       <button class="btn btn-outline-primary" type="submit">Post</button>
 				    </div>
 				  </div>					
 				</form>
