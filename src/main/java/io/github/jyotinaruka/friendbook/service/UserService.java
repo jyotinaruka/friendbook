@@ -76,7 +76,7 @@ public class UserService {
 	}
 	
 	public List<Post> allPosts(){
-		return (List<Post>) postRepository.findAll();
+		return postRepository.findAllByOrderByCreatedAtDesc();
 	}
 	
 	public List<Comment> allComments(){
