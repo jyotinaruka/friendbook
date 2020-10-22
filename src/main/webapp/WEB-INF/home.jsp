@@ -46,7 +46,7 @@
 					</div>
 				</div>
 
-				<a href="/delete">Delete</a>
+				<a href="/delete/${post.id}">Delete</a>
 
 				<c:forEach items="${post.comments}" var="comment">
 					<div class="card-body py-0 mb-2">

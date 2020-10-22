@@ -117,7 +117,7 @@ public class MainController {
 	  	return "redirect:/home";
   }
   
-  @PostMapping("/delete/{id}")
+  @GetMapping("/delete/{id}")
   public String delete(@PathVariable("id")Long id){
 	  userService.deletePost(id);
 	  return "redirect:/home";
