@@ -8,25 +8,28 @@
 
 <div class="row">
 	<div class="col-4 mt-3">
-		<img src='<c:out value="${loginUser.profile.profilePicPath}" />'  
+		<img src='<c:out value="${user.profile.profilePicPath}" />'  
 			onerror="javascript:this.src='/img/avatar.png'" class="rounded img-fluid" />
 	</div>
 
 
 	<div class="col mt-3">
-		<h1><c:out value="${loginUser.name}" /></h1>
+		<h1><c:out value="${user.name}" /></h1>
 		
 		
 		<h5>Intro</h5>
 		<p>
-			<c:out value="${loginUser.profile.bio}" />
+			<c:out value="${user.profile.bio}" />
 		</p>
-		<p><i class="ico fas fa-graduation-cap"></i> Studied at <c:out value="${loginUser.profile.education}" /></p>
-		<p><i class="ico fas fa-map-marker-alt"></i> Lives in <c:out value="${loginUser.profile.currentCity}" /></p>
+		<p><i class="ico fas fa-graduation-cap"></i> Studied at <c:out value="${user.profile.education}" /></p>
+		<p><i class="ico fas fa-map-marker-alt"></i> Lives in <c:out value="${user.profile.currentCity}" /></p>
+		
 		
 		<div class="form-inline">
 			<%-- <a href="/message"><button class=" btn-linear  btn-secondary p-1">Message</button></a>--%>
+			<c:if test="${loginUser.id == user.id}">
 			<a href="/profile/edit"><button class=" btn-linear  btn-secondary p-1">Edit</button></a>
+			</c:if>
 		</div>		
 	</div>
 	

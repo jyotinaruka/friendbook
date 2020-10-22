@@ -24,7 +24,7 @@
 		<c:forEach items="${allPosts }" var="post">
 			<div class="card my-3">
 			  <div class="card-body">
-			    <h6 class="card-subtitle mb-2 text-muted">Posted by <a href="/profile"><c:out value="${post.postedBy.name}" /></a></h6>
+			    <h6 class="card-subtitle mb-2 text-muted">Posted by <a href="/profile/user/${post.postedBy.id}"><c:out value="${post.postedBy.name}" /></a></h6>
 			    <p class="card-text"><c:out value="${post.message}" /><c:out value="${post.getCreatedAt()}"></c:out></p>
 			  </div>
 			 
@@ -36,7 +36,7 @@
 		<c:forEach items="${post.comments}" var="comment">
 			  <div class="card-body">
 				  <div class="card p-2">
-				  <h6 class="card-subtitle mb-2 text-muted">Commented by <c:out value="${comment.commentedBy.name}" /></h6>
+				  <h6 class="card-subtitle mb-2 text-muted">Commented by <a href="/profile/user/${comment.commentedBy.id}"><c:out value="${comment.commentedBy.name}" /></a></h6>
 				  <p class="card-text"><c:out value="${comment.message}"></c:out><c:out value="${comment.getCreatedAt()}"></c:out></p>
 				  </div>
 			  </div>
@@ -59,7 +59,6 @@
 	</div>
 </div>
 
-<%@include file="footer.jsp"%>
 
 <p>All Your Friends<p>
 <c:forEach items="${users.findAll }">
@@ -67,3 +66,4 @@
 </c:forEach>
 
 
+<%@include file="footer.jsp"%>

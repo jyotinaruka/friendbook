@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import io.github.jyotinaruka.friendbook.model.User;
@@ -30,6 +31,23 @@ public class ProfileController {
 		}
 		User loginUser = userService.findUserById(userId);
 		model.addAttribute("loginUser", loginUser);
+		model.addAttribute("user", loginUser);
+
+		return "profilePage.jsp";
+	}
+	
+	@GetMapping("/profile/user/{id}")
+	public String profile(@PathVariable Long id, Model model, HttpSession session) {
+		// check user_id in session, otherwise logout user
+		Long userId = (Long) session.getAttribute("user_id");
+		if (userId == null) {
+			return "redirect:/logout";
+		}
+		User loginUser = userService.findUserById(userId);
+		model.addAttribute("loginUser", loginUser);
+		
+		User user = userService.findUserById(id);
+		model.addAttribute("user", user);
 		
 		return "profilePage.jsp";
 	}
