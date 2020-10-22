@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page isErrorPage="true"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="pt" uri="http://ocpsoft.org/prettytime/tags" %>
 
 <%@include file="header.jsp"%>
 
@@ -21,26 +22,28 @@
 				</form>
 			</div>
 
-		<c:forEach items="${allPosts }" var="post">
+		<c:forEach items="${allPosts}" var="post">
 			<div class="card my-3">
 			  <div class="card-body">
-			    <h6 class="card-subtitle mb-2 text-muted">Posted by <a href="/profile/user/${post.postedBy.id}"><c:out value="${post.postedBy.name}" /></a></h6>
-			    <p class="card-text"><c:out value="${post.message}" /><c:out value="${post.getCreatedAt()}"></c:out></p>
+			    <h6 class="card-subtitle mb-2 text-muted">Posted by <a href="/profile/user/${post.postedBy.id}"><c:out value="${post.postedBy.name}" /></a> <pt:prettytime date="${post.createdAt}" /></h6>
+			    <p class="card-text"><c:out value="${post.message}" /></p>
+			    
+	   			  <form action="/like/${post.id}" method="post">
+					  <button type="submit" class="btn btn-outline-primary btn-sm rounded-circle" name="button" value="like"><i class="far fa-thumbs-up"></i></button>
+	  				  <c:out value="${likeButton}"></c:out>				  
+				  </form>
+		    
 			  </div>
 			 
-			 <form action="/like/${post.id }" method="post">
-			  <button type="submit" class="button" name="button" value="like">Like!</button>
-			  </form>
-			  <c:out value="${likeButton}"></c:out>
 			  
-		<c:forEach items="${post.comments}" var="comment">
+			<c:forEach items="${post.comments}" var="comment">
 			  <div class="card-body">
 				  <div class="card p-2">
-				  <h6 class="card-subtitle mb-2 text-muted">Commented by <a href="/profile/user/${comment.commentedBy.id}"><c:out value="${comment.commentedBy.name}" /></a></h6>
-				  <p class="card-text"><c:out value="${comment.message}"></c:out><c:out value="${comment.getCreatedAt()}"></c:out></p>
+				  <h6 class="card-subtitle mb-2 text-muted">Commented by <a href="/profile/user/${comment.commentedBy.id}"><c:out value="${comment.commentedBy.name}" /></a> <pt:prettytime date="${comment.createdAt}" /></h6>
+				  <p class="card-text"><c:out value="${comment.message}" /></p>
 				  </div>
 			  </div>
-		</c:forEach>
+			</c:forEach>
 			    <div class="card-footer">
 					<form action="/comment/${post.id}" method="post">
 						  <div class="input-group">
