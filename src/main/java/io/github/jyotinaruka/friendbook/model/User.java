@@ -3,6 +3,7 @@ package io.github.jyotinaruka.friendbook.model;
 
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -11,6 +12,9 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
@@ -34,7 +38,19 @@ public class User {
 	
 	@OneToOne(mappedBy = "user", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	private UserProfile profile;
+
 	
+	@OneToMany(mappedBy="host", fetch =FetchType.LAZY)
+	private List<Event> events;
+	
+//	@ManyToMany(fetch = FetchType.LAZY)
+//	@JoinTable(
+//		name = "events_users",
+//		joinColumns = @JoinColumn(name = "user_id"),
+//		inverseJoinColumns = @JoinColumn(name = "event_id")
+//	)
+//	private List<Event> events;
+//	
 	
 	@Email(message = "Email must be valid.")
 	@NotBlank(message = "Email is required.")
@@ -126,4 +142,15 @@ public class User {
 	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
 	}
+
+	public List<Event> getEvents() {
+		return events;
+	}
+
+	public void setEvents(List<Event> events) {
+		this.events = events;
+	}
+	
+	
+	
 }
