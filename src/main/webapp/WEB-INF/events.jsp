@@ -8,7 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>FriendBook - Create Events</title>
-<link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" type="text/css" href="css/event_table.css">
         <script type="text/javascript" src="js/app.js"></script>    
 </head>
 <body>
@@ -27,10 +27,10 @@
 		<tbody>
 			<c:forEach items="${events}" var="event">
 			<tr>
-				<td><a href="/events/${event.id}"><c:out value="${event.name}"/></a></td>
+				<td><a href="/events/${event.id}"><c:out value="${event.eventname}"/></a></td>
 				<td><c:out value="${event.date}"/></td>
 				<td><c:out value="${event.location}"/></td>
-				<td><c:out value="${event.creator.name}"/></td>
+				<td><c:out value="${event.host.name}"/></td>
 				
 				<td>
 					<c:choose>
@@ -39,7 +39,7 @@
 							<a href="/events/${event.id}/delete">Delete</a>
 						</c:when>
 						
-						<c:when test="${event.users.contains(user)}">
+						<c:when test="${event.attendees.contains(user)}">
 							Joined <a href="/events/${event.id}/cancel">Cancel</a>
 						</c:when>
 						
@@ -53,6 +53,6 @@
 		</tbody>
 	</table>
 	
-	<a href="/tasks/new">Create a task</a>
+	<a href="/events/new">Create a event</a>
 </body>
 </html>

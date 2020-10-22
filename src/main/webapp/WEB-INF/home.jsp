@@ -24,14 +24,20 @@
 		<c:forEach items="${allPosts }" var="post">
 			<div class="card my-3">
 			  <div class="card-body">
-			    <h6 class="card-subtitle mb-2 text-muted">Posted by <c:out value="${post.postedBy.name}" /></h6>
-			    <p class="card-text"><c:out value="${post.message}" /></p>
+			    <h6 class="card-subtitle mb-2 text-muted">Posted by <a href="/profile/user/${post.postedBy.id}"><c:out value="${post.postedBy.name}" /></a></h6>
+			    <p class="card-text"><c:out value="${post.message}" /><c:out value="${post.getCreatedAt()}"></c:out></p>
 			  </div>
+			 
+			 <form action="/like/${post.id }" method="post">
+			  <button type="submit" class="button" name="button" value="like">Like!</button>
+			  </form>
+			  <c:out value="${likeButton}"></c:out>
+			  
 		<c:forEach items="${post.comments}" var="comment">
 			  <div class="card-body">
 				  <div class="card p-2">
-				  <h6 class="card-subtitle mb-2 text-muted">Commented by <c:out value="${comment.commentedBy.name}" /></h6>
-				  <p class="card-text"><c:out value="${comment.message}"></c:out></p>
+				  <h6 class="card-subtitle mb-2 text-muted">Commented by <a href="/profile/user/${comment.commentedBy.id}"><c:out value="${comment.commentedBy.name}" /></a></h6>
+				  <p class="card-text"><c:out value="${comment.message}"></c:out><c:out value="${comment.getCreatedAt()}"></c:out></p>
 				  </div>
 			  </div>
 		</c:forEach>
@@ -46,13 +52,18 @@
 					</form>
 			    </div>
 			</div>
+			</c:forEach>
 			
-			
-		</c:forEach>
-
 
 
 	</div>
 </div>
+
+
+<p>All Your Friends<p>
+<c:forEach items="${users.findAll }">
+<c:out value="${user.name }"/>
+</c:forEach>
+
 
 <%@include file="footer.jsp"%>

@@ -43,6 +43,7 @@ public class EventService {
 		e.setDate(date);
 		e.setLocation(location);
 		e.setHost(host);
+//		e.setAttendees(attendees);
 		
 		return eventRepository.save(e);
 	}

@@ -10,7 +10,7 @@
 <title>New Event</title>
 </head>
 <body>
-	<h1>Edit an Event: <c:out value="${event.name}"/></h1>
+	<h1>Edit an Event: <c:out value="${event.eventname}"/></h1>
 	
 	<form:form action="/events/${event.id}" method="POST" modelAttribute="event">
 	<input type="hidden" name="_method" value="put">

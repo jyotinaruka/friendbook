@@ -12,7 +12,7 @@
 
 </head>
 <body>
-	<h1><c:out value="${event.name}"/></h1>
+	<h1><c:out value="${event.eventname}"/></h1>
 	
 	<p>Posted By: <c:out value="${event.host.name}"/>
 	<p>Date: <c:out value="${event.date}"/>

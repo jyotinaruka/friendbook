@@ -42,7 +42,7 @@ public class Event {
     private Date updatedAt;
     
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="host_id")
+    @JoinColumn(name="user_id")
     private User host;
     
     
@@ -52,8 +52,7 @@ public class Event {
     		joinColumns = @JoinColumn(name = "event_id"),
     		inverseJoinColumns = @JoinColumn(name = "user_id")
     )
-    private List<User> users;
-//    private List<User> attendees;
+    private List<User> attendees;
     
     @PrePersist
 	protected void onCreate(){
@@ -109,12 +108,14 @@ public class Event {
 	public void setHost(User host) {
 		this.host = host;
 	}
-	public List<User> getUsers() {
-		return users;
+	public List<User> getAttendees() {
+		return attendees;
 	}
-	public void setUsers(List<User> users) {
-		this.users = users;
+	public void setAttendees(List<User> attendees) {
+		this.attendees = attendees;
 	}
+
+
 	
 	
 }

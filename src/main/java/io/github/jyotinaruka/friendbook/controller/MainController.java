@@ -60,6 +60,7 @@ public class MainController {
     model.addAttribute("time", localTime);
 
     model.addAttribute(post);
+    model.addAttribute("findAll", userService.findAll());
 
     return "home.jsp";
   }
@@ -121,7 +122,7 @@ public class MainController {
 	List<Event> events = eventService.allEvents();
 	model.addAttribute("events", events);
 	
-	Long userId = (Long) session.getAttribute("userId");
+	Long userId = (Long) session.getAttribute("user_id");
 	User u = userService.findUserById(userId);
 	model.addAttribute("user", u);
 	
@@ -157,7 +158,7 @@ public class MainController {
 		  return "newEvent.jsp";
 	  }
 	  else {
-		  User host = userService.findUserById((Long) session.getAttribute("userId"));
+		  User host = userService.findUserById((Long) session.getAttribute("user_id"));
 		  event.setHost(host);
 			
 		  
@@ -189,9 +190,9 @@ public class MainController {
 		
 		//
 		Event event = eventService.findEvent(id);
-		if(session.getAttribute("userId") != event.getHost().getId()) {
-			return "redirect:/events";
-		}
+//		if(session.getAttribute("user_id") != event.getHost().getId()) {
+//			return "redirect:/events";
+//		}
 		
 		
 		List<User> users = userService.findAll();
@@ -215,7 +216,7 @@ public class MainController {
 			return "editEvent.jsp";
 		}
 		else {
-			User host = userService.findUserById((Long) session.getAttribute("userId"));
+			User host = userService.findUserById((Long) session.getAttribute("user_id"));
 			event.setHost(host);
 			
 			eventService.updateEvent(event);
@@ -225,8 +226,15 @@ public class MainController {
   
 	//Join
 //	@RequestMapping("/events/{id}/join", method=RequestMethod.POST)
-//	public String joinEvent(@)
-//		event 
+//	public String joinEvent(@PathVariable("Long" Long id, 
+//		@ModelAttribute("event) Event event, HttpSession session){
+//			User user = userService.findAll();
+			
+//			userService.updateUser(user);
+//			return "redirect:/events";
+				
+//	}
+
 	
 	
 	
@@ -242,4 +250,16 @@ public class MainController {
 		eventService.deleteEvent(id);
 		return "redirect:/events";
 	}
+
+  @PostMapping("/like/{id}")
+  public String like(Model model, HttpSession session, @PathVariable("id")Long id, @RequestParam(value="button")String button) {
+	  	Long userId= (Long) session.getAttribute("user_id");
+	  	User u = userService.findUserById(userId);
+	  	session.setAttribute("likes", 0);
+	  	if(button.equals("like")) {
+	  		int likeButton = +1;	
+	  	}
+	  	return "redirect:/home";
+  }
+
 }

@@ -12,6 +12,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
@@ -43,14 +44,14 @@ public class User {
 	@OneToMany(mappedBy="host", fetch =FetchType.LAZY)
 	private List<Event> events;
 	
-//	@ManyToMany(fetch = FetchType.LAZY)
-//	@JoinTable(
-//		name = "events_users",
-//		joinColumns = @JoinColumn(name = "user_id"),
-//		inverseJoinColumns = @JoinColumn(name = "event_id")
-//	)
-//	private List<Event> events;
-//	
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(
+		name = "users_events",
+		joinColumns = @JoinColumn(name = "user_id"),
+		inverseJoinColumns = @JoinColumn(name = "event_id")
+	)
+	private List<Event> eventsAttending;
+	
 	
 	@Email(message = "Email must be valid.")
 	@NotBlank(message = "Email is required.")
@@ -149,6 +150,14 @@ public class User {
 
 	public void setEvents(List<Event> events) {
 		this.events = events;
+	}
+
+	public List<Event> getEventsAttending() {
+		return eventsAttending;
+	}
+
+	public void setEventsAttending(List<Event> eventsAttending) {
+		this.eventsAttending = eventsAttending;
 	}
 	
 	
