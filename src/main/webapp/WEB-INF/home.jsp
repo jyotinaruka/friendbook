@@ -24,8 +24,14 @@
 		</div>
 
 		<c:forEach items="${allPosts}" var="post">
-			<div class="card my-3">
-				<div class="card-body">
+		<div class="card my-3">
+			<div class="row no-gutters">
+			    <div class="col-md-1">
+			      <img src='<c:out value="${post.postedBy.profile.profilePicPath}" />'  
+			onerror="javascript:this.src='/img/avatar.png'" class="card-img" >
+			    </div>
+			    <div class="col-md-11">
+				  <div class="card-body">
 					<h6 class="card-subtitle mb-2 text-muted">Posted by <a href="/profile/user/${post.postedBy.id}">
 							<c:out value="${post.postedBy.name}" /></a>
 						<pt:prettytime date="${post.createdAt}" />
@@ -45,9 +51,11 @@
 							</c:if>
 						</form>
 					</div>
+				  </div>
 				</div>
-
-				
+			</div>
+			<div class="row no-gutters">
+			    <div class="col">
 
 				<c:forEach items="${post.comments}" var="comment">
 					<div class="card-body py-0 mb-2">
@@ -73,7 +81,9 @@
 						</div>
 					</form>
 				</div>
+				</div>
 			</div>
+		 </div>
 		</c:forEach>
 
 
