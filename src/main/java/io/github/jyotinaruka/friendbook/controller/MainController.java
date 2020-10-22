@@ -6,6 +6,9 @@ import io.github.jyotinaruka.friendbook.model.User;
 import io.github.jyotinaruka.friendbook.service.UserService;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -99,10 +102,18 @@ public class MainController {
   public String like(Model model, HttpSession session, @PathVariable("id")Long id, @RequestParam(value="button")String button) {
 	  	Long userId= (Long) session.getAttribute("user_id");
 	  	User u = userService.findUserById(userId);
-	  	session.setAttribute("likes", 0);
-	  	if(button.equals("like")) {
-	  		int likeButton = +1;	
+	  	
+	  	Map<Long, Integer> likes = (Map<Long, Integer>) session.getAttribute("likes");
+	  	if(likes == null) {
+	  		likes = new HashMap<>();
 	  	}
+	  	
+	  	if(button.equals("like")) {
+	  		int likeButton = likes.getOrDefault(id, 0);	
+	  		likeButton += 1;
+	  		likes.put(id, likeButton);
+	  	}
+	  	session.setAttribute("likes", likes);
 	  	return "redirect:/home";
   }
 }
