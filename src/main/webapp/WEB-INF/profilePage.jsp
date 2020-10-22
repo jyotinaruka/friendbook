@@ -15,12 +15,6 @@
 	<div class="col mt-3">
 		<h1><c:out value="${loginUser.name}" /></h1>
 		
-		<%-- 
-		<div class="form-inline">
-				<a href="/message"><button type="submit" class=" btn-linear  btn-secondary p-1">Message</button></a>
-				<a href="/edit"><button type="submit" class=" btn-linear  btn-secondary p-1">Edit</button></a>
-		</div>
-		--%>
 		
 		<h5>Intro</h5>
 		<p>
@@ -30,7 +24,7 @@
 		<p><i class="ico fas fa-map-marker-alt"></i> Lives in <c:out value="${loginUser.profile.currentCity}" /></p>
 		
 		<div class="form-inline">
-			<a href="/message"><button class=" btn-linear  btn-secondary p-1">Message</button></a>
+			<%-- <a href="/message"><button class=" btn-linear  btn-secondary p-1">Message</button></a>--%>
 			<a href="/profile/edit"><button class=" btn-linear  btn-secondary p-1">Edit</button></a>
 		</div>		
 	</div>

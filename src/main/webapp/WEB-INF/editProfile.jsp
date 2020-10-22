@@ -36,7 +36,7 @@
 		<p><i class="ico fas fa-map-marker-alt"></i> Lives in <form:input path="currentCity"/></p>
 		
 		<div class="form-inline">
-			<a href="/message"><button class=" btn-linear  btn-secondary p-1">Message</button></a>
+			<%--<a href="/message"><button class=" btn-linear  btn-secondary p-1">Message</button></a>--%>
 			<button type="submit" class=" btn-linear  btn-secondary p-1">Save</button>
 		</div>		
 	</div>
