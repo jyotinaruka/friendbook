@@ -52,6 +52,10 @@ public class EventService {
 		return eventRepository.save(e);
 	}
 	
+	public Event addAttendee(Event e) {
+		return eventRepository.save(e);
+	}
+	
 	public void deleteEvent(Long id) {
 		eventRepository.deleteById(id);
 	}

@@ -16,12 +16,41 @@
 <body>
 	<div id="wrapper">
 
-		<div class="reg_img">
-			<img src="img/logo1.png" alt="" />
-		</div>
-		<div id="bg-register" class="row">
+		<div id="bg-register" class="row rounded my-5">
 
+			<div class="col mx-2">
+				<div class="text-center">
+					<img src="img/logo1.png" alt="" />
+				</div>
+				
+				<div class="form-group row">
+					<p class="col text-danger">
+						<form:errors path="loginUser.*" />
+					</p>
+				</div>
+				<form:form method="POST" action="/login" modelAttribute="loginUser">
+					<div class="form-group row">
+						<form:label path="email" cssClass="col-sm-3 col-form-label">Email:</form:label>
+						<div class="col-sm">
+							<form:input type="email" path="email" cssClass="form-control" />
+						</div>
+					</div>
+					<div class="form-group row">
+						<form:label path="password" cssClass="col-sm-3 col-form-label">Password:</form:label>
+						<div class="col-sm">
+							<form:password path="password" cssClass="form-control" />
+						</div>
+					</div>
+					<div class="form-group row">
+						<div class="col-sm text-center ">
+							<button type="submit" class="btn btn-primary">Login</button>
+						</div>
+					</div>
+				</form:form>
+			</div>
 
+			<div class="col-v-divider"></div>
+			
 			<div class="col mx-2">
 
 				<h2 class="text-center">Register</h2>
@@ -63,36 +92,7 @@
 					</div>
 					<div class="form-group row">
 						<div class="col-sm text-center ">
-							<button type="submit" class=" btn-linear  btn-success">Register</button>
-						</div>
-					</div>
-				</form:form>
-			</div>
-			<div class="col-v-divider"></div>
-			<div class="col mx-2">
-				<h2 class="text-center">Login</h2>
-
-				<div class="form-group row">
-					<p class="col text-danger">
-						<form:errors path="loginUser.*" />
-					</p>
-				</div>
-				<form:form method="POST" action="/login" modelAttribute="loginUser">
-					<div class="form-group row">
-						<form:label path="email" cssClass="col-sm-3 col-form-label">Email:</form:label>
-						<div class="col-sm">
-							<form:input type="email" path="email" cssClass="form-control" />
-						</div>
-					</div>
-					<div class="form-group row">
-						<form:label path="password" cssClass="col-sm-3 col-form-label">Password:</form:label>
-						<div class="col-sm">
-							<form:password path="password" cssClass="form-control" />
-						</div>
-					</div>
-					<div class="form-group row">
-						<div class="col-sm text-center ">
-							<button type="submit" class=" btn-linear  btn-success">Login</button>
+							<button type="submit" class="btn btn-primary">Register</button>
 						</div>
 					</div>
 				</form:form>

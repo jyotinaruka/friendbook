@@ -41,6 +41,7 @@ public class PhotoController {
 		User loginUser = userService.findUserById(userId);
 		model.addAttribute("loginUser", loginUser);
 		
+		
 		UserProfile profile = userService.getProfileForUser(userId);
 		String fileName = StringUtils.cleanPath(file.getOriginalFilename());
 		Path path = Paths.get(uploadDir, "userphotos/" + loginUser.getId());

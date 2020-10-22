@@ -5,7 +5,13 @@
 
 	</main>
 	<footer>
-		<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+		<nav class="navbar navbar-expand-lg navbar-dark text-light bg-primary text-right">
+			<div class="nav-text">&copy; Friendbook 2020</div>
+			<ul class="navbar-nav ml-auto">
+				<li class="nav-item"><a class="nav-link" href="javascript:void(0);">Terms & Conditions</a></li>
+				<li class="nav-item"><a class="nav-link" href="javascript:void(0);">Privacy</a></li>
+				<li class="nav-item"><a class="nav-link" href="javascript:void(0);">Contact Us</a></li>
+			</ul>
 		</nav>
 	</footer>
 	

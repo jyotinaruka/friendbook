@@ -20,5 +20,6 @@
 	
 	<a href="/events/${event.id}/edit">Edit</a>
 	<p><a href="/events">Back to Event List</a></p>
+	
 </body>
 </html>

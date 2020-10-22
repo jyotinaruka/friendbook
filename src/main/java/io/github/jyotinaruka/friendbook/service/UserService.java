@@ -76,7 +76,7 @@ public class UserService {
 	}
 	
 	public List<Post> allPosts(){
-		return (List<Post>) postRepository.findAll();
+		return postRepository.findAllByOrderByCreatedAtDesc();
 	}
 	
 	public List<Comment> allComments(){
@@ -121,5 +121,9 @@ public class UserService {
 	
 	public UserProfile getProfileForUser(Long userId) {
 		return profileRepository.findFirstByUserId(userId);
+	}
+	
+	public void deletePost(Long id) {
+		postRepository.deleteById(id);
 	}
 }

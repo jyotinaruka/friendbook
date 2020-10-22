@@ -11,17 +11,24 @@
 		<img src='<c:out value="${loginUser.profile.profilePicPath}" />'
 			onerror="javascript:this.src='/img/avatar.png'" class="rounded img-fluid" />
 
+		
 		<form action="/photo/profilepic" method="POST"
 			enctype="multipart/form-data">
 			<div class="input-group mt-3">
-				<input id="profilePic" name="profilePic" type="file"
-					accept="image/png, image/jpeg" class="form-control" />
+				<div class="custom-file">
+					<input type="file" class="custom-file-input" id="profilePic"
+						name="profilePic" accept="image/png, image/jpeg" /> <label
+						class="custom-file-label" for="profilePic"
+						aria-describedby="profilePic">Choose photo</label>
+				</div>
 				<div class="input-group-append">
 					<button class="btn btn-outline-secondary" type="submit">Upload</button>
 				</div>
 			</div>
 		</form>
 	</div>
+
+
 
 
 	<form:form action="/profile/edit" modelAttribute="editUserProfile"
@@ -32,13 +39,6 @@
 			<h1>
 				<c:out value="${loginUser.name}" />
 			</h1>
-
-			<%-- 
-			<div class="form-inline">
-					<a href="/message"><button type="submit" class=" btn-linear  btn-secondary p-1">Message</button></a>
-					<a href="/edit"><button type="submit" class=" btn-linear  btn-secondary p-1">Edit</button></a>
-			</div>
-			--%>
 
 			<div class="bg-danger text-white" role="alert">
 				<form:errors path="editUserProfile.*" />

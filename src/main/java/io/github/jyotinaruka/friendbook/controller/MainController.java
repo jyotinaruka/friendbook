@@ -8,7 +8,12 @@ import io.github.jyotinaruka.friendbook.service.EventService;
 import io.github.jyotinaruka.friendbook.service.UserService;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
 import java.util.List;
+
+import java.util.HashMap;
+import java.util.Map;
+
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -225,15 +230,25 @@ public class MainController {
 	}
   
 	//Join
-//	@RequestMapping("/events/{id}/join", method=RequestMethod.POST)
-//	public String joinEvent(@PathVariable("Long" Long id, 
-//		@ModelAttribute("event) Event event, HttpSession session){
+	@RequestMapping("/events/{id}/join")
+	public String addAttentee(@PathVariable("id") Long id, 
+		@ModelAttribute("event") Event event, HttpSession session, BindingResult result){
 //			User user = userService.findAll();
+			Event e = eventService.findEvent(id);
+			List<User> attendees = e.getAttendees();
+			
+			User user = userService.findUserById((Long) session.getAttribute("user_id"));
+			attendees.add(user);	
+			
+			e.setAttendees(attendees);
+			
+			eventService.updateEvent(e);
 			
 //			userService.updateUser(user);
-//			return "redirect:/events";
+	
+			return "redirect:/events";
 				
-//	}
+	}
 
 	
 	
@@ -255,11 +270,26 @@ public class MainController {
   public String like(Model model, HttpSession session, @PathVariable("id")Long id, @RequestParam(value="button")String button) {
 	  	Long userId= (Long) session.getAttribute("user_id");
 	  	User u = userService.findUserById(userId);
-	  	session.setAttribute("likes", 0);
-	  	if(button.equals("like")) {
-	  		int likeButton = +1;	
+	  	
+	  	Map<Long, Integer> likes = (Map<Long, Integer>) session.getAttribute("likes");
+	  	if(likes == null) {
+	  		likes = new HashMap<>();
 	  	}
+	  	
+	  	if(button.equals("like")) {
+	  		int likeButton = likes.getOrDefault(id, 0);	
+	  		likeButton += 1;
+	  		likes.put(id, likeButton);
+	  	}
+	  	session.setAttribute("likes", likes);
 	  	return "redirect:/home";
+  }
+
+  
+  @GetMapping("/delete/{id}")
+  public String delete(@PathVariable("id")Long id){
+	  userService.deletePost(id);
+	  return "redirect:/home";
   }
 
 }
