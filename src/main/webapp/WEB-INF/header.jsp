@@ -16,7 +16,8 @@
 
 </head>
 <body>
-	<div id="wrapper">
+	<div id="wrapper" class="d-flex flex-column h-100">
+		<header class="sticky-top">
 		<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
 			<a class="navbar-brand" href="#"><img src="/img/logo1.png"
 				width="30" height="30" alt="" /></a>
@@ -32,6 +33,7 @@
 					<li class="nav-item "><a class="nav-link" href="/logout">Logout</a></li>
 				</ul>
 			</div>
-			
 		</nav>
-		<main>
+		</header>
+		<main role="main" class="flex-shrink-0">
+			<div class="container">

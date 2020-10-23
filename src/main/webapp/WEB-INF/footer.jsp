@@ -3,9 +3,10 @@
 <%@ page isErrorPage="true"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
+	  </div>
 	</main>
-	<footer>
-		<nav class="navbar navbar-expand-lg navbar-dark text-light bg-primary text-right">
+	<footer class="footer mt-auto bg-primary text-light">
+		<nav class="navbar navbar-expand-lg navbar-dark">
 			<div class="nav-text">&copy; Friendbook 2020</div>
 			<ul class="navbar-nav ml-auto">
 				<li class="nav-item"><a class="nav-link" href="javascript:void(0);">Terms & Conditions</a></li>
