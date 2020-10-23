@@ -18,19 +18,18 @@
 <body>
 	<div id="wrapper" class="d-flex flex-column h-100">
 		<header class="sticky-top">
-		<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-			<a class="navbar-brand" href="#"><img src="/img/logo1.png"
-				width="30" height="30" alt="" /></a>
+		<nav class="navbar navbar-expand-md navbar-dark bg-primary p-2">
+			<a class="navbar-brand p-0" href="/home"><img src="/img/logo-icon-sm.png" alt="" /></a>
 			
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
 			    <span class="navbar-toggler-icon"></span>
 			  </button>				
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
-				<ul class="navbar-nav mr-auto">
-					<li class="nav-item active"><a class="nav-link" href="/profile">Welcome <c:out value="${loginUser.name}" />!</a></li>
-					<li class="nav-item "><a class="nav-link" href="/home">Home</a></li>
-					<li class="nav-item "><a class="nav-link" href="/events">Events</a></li>
-					<li class="nav-item "><a class="nav-link" href="/logout">Logout</a></li>
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item active"><a class="nav-link" href="/profile">Welcome <c:out value="${loginUser.name}" /></a></li>
+					<li class="nav-item active"><a class="nav-link" href="/home">Home</a></li>
+					<li class="nav-item active"><a class="nav-link" href="/events">Events</a></li>
+					<li class="nav-item active"><a class="nav-link" href="/logout">Logout</a></li>
 				</ul>
 			</div>
 		</nav>
