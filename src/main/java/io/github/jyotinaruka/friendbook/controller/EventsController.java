@@ -194,4 +194,20 @@ public class EventsController {
     eventService.deleteEvent(id);
     return "redirect:/events";
   }
+  
+  @RequestMapping("/events/{id}/cancel")
+  public String removeAttentee(@PathVariable("id") Long id, 
+      @ModelAttribute("event") Event event, HttpSession session, BindingResult result){
+
+          Event e = eventService.findEvent(id);
+          List<User> attendees = e.getAttendees();
+
+          User user = userService.findUserById((Long) session.getAttribute("user_id"));
+          attendees.remove(user);
+
+          e.setAttendees(attendees);
+          eventService.updateEvent(e);
+
+          return "redirect:/events";
+  }
 }
