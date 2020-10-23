@@ -52,7 +52,7 @@
 		</tbody>
 	</table>
 	
-	<a href="/events/new"><button class="btn btn-outline-primary"><i class="far fa-calendar-alt"></i> Create Event</button></a>
+	<a href="/events/new" class="btn btn-outline-primary"><i class="far fa-calendar-alt"></i> Create Event</a>
 	</div>
 </div>
 <%@include file="footer.jsp"%>
