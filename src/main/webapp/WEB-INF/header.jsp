@@ -28,6 +28,7 @@
 				<ul class="navbar-nav mr-auto">
 					<li class="nav-item active"><a class="nav-link" href="/profile">Welcome <c:out value="${loginUser.name}" />!</a></li>
 					<li class="nav-item "><a class="nav-link" href="/home">Home</a></li>
+					<li class="nav-item "><a class="nav-link" href="/events">Events</a></li>
 					<li class="nav-item "><a class="nav-link" href="/logout">Logout</a></li>
 				</ul>
 			</div>

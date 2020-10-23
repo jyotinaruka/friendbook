@@ -1,14 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
- <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page isErrorPage="true"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>New Event</title>
-</head>
-<body>
+<%@ taglib prefix="fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="pt" uri="http://ocpsoft.org/prettytime/tags" %>
+
+<%@include file="header.jsp"%>
+
+<div class="row">
+	<div class="col-sm-12">
 	<h1>Create a new Event</h1>
 	
 	<form:form action="/events" method="POST" modelAttribute="event">
@@ -35,5 +36,6 @@
 	<input type="submit" value="Create"/>
 	</form:form>
 	<p><a href="/events">Back to Event List</a></p>
-</body>
-</html>
+	</div>
+</div>
+<%@include file="footer.jsp"%>
