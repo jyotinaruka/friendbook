@@ -131,7 +131,8 @@ public class MainController {
 
   
   @GetMapping("/delete/{id}")
-  public String delete(@PathVariable("id")Long id){
+  public String delete(@PathVariable("id") Long id){
+	  userService.deleteAllCommentsByPostId(id);
 	  userService.deletePost(id);
 	  return "redirect:/home";
   }

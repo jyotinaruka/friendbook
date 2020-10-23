@@ -3,6 +3,8 @@ package io.github.jyotinaruka.friendbook.service;
 import java.util.List;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -122,8 +124,14 @@ public class UserService {
 	public UserProfile getProfileForUser(Long userId) {
 		return profileRepository.findFirstByUserId(userId);
 	}
-	
+
+	@Transactional
 	public void deletePost(Long id) {
 		postRepository.deleteById(id);
+	}
+
+	@Transactional
+	public void deleteAllCommentsByPostId(Long postId) {
+		commentRepository.deleteAllByPostId(postId);
 	}
 }
