@@ -8,7 +8,7 @@
 
 <%@include file="header.jsp"%>
 
-<div class="row">
+<div class="row bg-light">
 	<div class="col-sm-12">
 
 		<div class="card my-3">
@@ -33,9 +33,13 @@
 			    <div class="col-md-11">
 				  <div class="card-body">
 					<h6 class="card-subtitle mb-2 text-muted">Posted by <a href="/profile/user/${post.postedBy.id}">
-							<c:out value="${post.postedBy.name}" /></a>
+							<c:out value="${post.postedBy.name}" /></a>,
 						<pt:prettytime date="${post.createdAt}" />
-						<span class="float-right"><a href="/delete/${post.id}" class="text-danger"><i class="far fa-trash-alt"></i> Delete</a></span>
+						<c:if test="${post.postedBy.id == loginUser.id}">
+						<span class="float-right">
+							<a href="/delete/${post.id}" class="text-danger"><i class="far fa-trash-alt"></i> Delete</a>
+						</span>
+						</c:if>
 					</h6>
 					<p class="card-text">
 						<c:out value="${post.message}" />

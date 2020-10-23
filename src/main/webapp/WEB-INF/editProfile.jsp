@@ -32,15 +32,13 @@
 
 
 	<form:form action="/profile/edit" modelAttribute="editUserProfile"
-		method="POST" class="form-row">
+		method="POST" class="col mt-3 form-row">
 		<form:hidden path="id" />
 		<form:hidden path="user.id" />
-		<div class="col mt-3">
+		<div class="col">
 			<h1>
 				<c:out value="${loginUser.name}" />
 			</h1>
-
-			
 
 			<h5>Intro</h5>
 			<div class="input-group input-group-sm mb-3">
@@ -62,7 +60,7 @@
 			  <form:errors path="currentCity" element="div" cssClass="invalid-feedback" />
 			</div>
 			<div>
-				<button type="submit" class="btn btn-secondary btn-sm">Save</button>
+				<button type="submit" class="btn btn-secondary"><i class="fas fa-user-edit"></i> Save</button>
 			</div>
 		</div>
 	</form:form>

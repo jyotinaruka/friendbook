@@ -27,7 +27,7 @@
 		
 		<div class="form-inline">
 			<c:if test="${loginUser.id == user.id}">
-			<a href="/profile/edit"><button class="btn btn-secondary btn-sm">Edit</button></a>
+			<a href="/profile/edit" class="btn btn-secondary"><i class="fas fa-user-edit"></i> Edit</a>
 			</c:if>
 		</div>		
 	</div>
