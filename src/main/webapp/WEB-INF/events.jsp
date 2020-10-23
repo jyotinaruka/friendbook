@@ -1,30 +1,29 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
- <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page isErrorPage="true"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="pt" uri="http://ocpsoft.org/prettytime/tags" %>
+
 <%@include file="header.jsp"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>FriendBook - Create Events</title>
-<link rel="stylesheet" type="text/css" href="css/event_table.css">
-        <script type="text/javascript" src="js/app.js"></script>    
-</head>
-<body>
-	<h1>Welcome, <c:out value="${user.name}"/></h1>
+
+<div class="row">
+	<div class="col-sm-12">
+	<h1>Welcome, <c:out value="${user.name}"/>!</h1>
+	<h2>All events</h2>
 	
-	<table>
-		<thead>
-			<tr>
-				<th>Name</th>
-				<th>Date</th>
-				<th>Location</th>
-				<th>Host</th>
-				<th>Action</th>
-			</tr>
-		</thead>
-		<tbody>
+	<table class="table table-hover">
+	    <thead>
+		    <tr class="bg-dark text-light">
+				<th scope="col">Name</th>
+				<th scope="col">Date</th>
+				<th scope="col">Location</th>
+				<th scope="col">Host</th>
+				<th scope="col" class="text-center">Action</th>
+		    </tr>
+	    </thead>
+		<tbody class="table-sm">
 			<c:forEach items="${events}" var="event">
 			<tr>
 				<td><a href="/events/${event.id}"><c:out value="${event.eventname}"/></a></td>
@@ -32,19 +31,19 @@
 				<td><c:out value="${event.location}"/></td>
 				<td><c:out value="${event.host.name}"/></td>
 				
-				<td>
+				<td class="text-center">
 					<c:choose>
 						<c:when test="${user == event.host}">
-							<a href="/events/${event.id}/edit">Edit</a> | 
-							<a href="/events/${event.id}/delete">Delete</a>
+							<a class="btn btn-sm btn-outline-primary" href="/events/${event.id}/edit"><i class="far fa-edit"></i> Edit</a> 
+							<a class="btn btn-sm btn-outline-danger" href="/events/${event.id}/delete"><i class="far fa-trash-alt"></i> Delete</a>
 						</c:when>
 						
 						<c:when test="${event.attendees.contains(user)}">
-							Joined <a href="/events/${event.id}/cancel">Cancel</a>
+							Joined <a class="btn btn-sm btn-outline-danger" href="/events/${event.id}/cancel"><i class="fas fa-user-minus"></i> Cancel</a>
 						</c:when>
 						
 						<c:otherwise>
-							<a href="/events/${event.id}/join">Join</a>
+							<a class="btn btn-sm btn-outline-success" href="/events/${event.id}/join"><i class="fas fa-user-plus"></i> Join</a>
 						</c:otherwise>
 					</c:choose>
 				</td>
@@ -53,6 +52,7 @@
 		</tbody>
 	</table>
 	
-	<a href="/events/new">Create a event</a>
-</body>
-</html>
+	<a href="/events/new"><button class="btn btn-outline-primary"><i class="far fa-calendar-alt"></i> Create Event</button></a>
+	</div>
+</div>
+<%@include file="footer.jsp"%>
