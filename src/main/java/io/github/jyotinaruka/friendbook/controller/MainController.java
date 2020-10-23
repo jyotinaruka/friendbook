@@ -1,34 +1,25 @@
 package io.github.jyotinaruka.friendbook.controller;
 
-import io.github.jyotinaruka.friendbook.model.Comment;
-import io.github.jyotinaruka.friendbook.model.Event;
-import io.github.jyotinaruka.friendbook.model.Post;
-import io.github.jyotinaruka.friendbook.model.User;
-import io.github.jyotinaruka.friendbook.service.EventService;
-import io.github.jyotinaruka.friendbook.service.UserService;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
-import java.util.List;
-
 import java.util.HashMap;
 import java.util.Map;
 
-
 import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import io.github.jyotinaruka.friendbook.model.Comment;
+import io.github.jyotinaruka.friendbook.model.Post;
+import io.github.jyotinaruka.friendbook.model.User;
+import io.github.jyotinaruka.friendbook.service.UserService;
 
 
 @Controller
@@ -78,6 +69,10 @@ public class MainController {
     Long userId = (Long) session.getAttribute("user_id");
     User u = userService.findUserById(userId);
 
+    if(post == null || post.trim().length() == 0) {
+    	return "redirect:/home";
+    }
+    
     Post post1 = new Post();
     post1.setMessage(post);
 
@@ -101,6 +96,10 @@ public class MainController {
     Long userId = (Long) session.getAttribute("user_id");
     User u = userService.findUserById(userId);
 
+    if(comment == null || comment.trim().length() == 0) {
+    	return "redirect:/home";
+    }
+    
     Comment comment1 = new Comment();
     comment1.setMessage(comment);
     comment1.setPost(userService.findPost(id));
