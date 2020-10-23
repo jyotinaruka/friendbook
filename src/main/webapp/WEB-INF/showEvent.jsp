@@ -12,18 +12,20 @@
 	<div class="col-sm-12">
 	<h1><c:out value="${event.eventname}"/></h1>
 	
-	<p>Posted By: <c:out value="${event.host.name}"/>
-	<p>Date: <c:out value="${event.date}"/>
-	<p>Location: <c:out value="${event.location}"/>
-	<p>Attendee:</p>
+	<p><b>Posted By:</b> <c:out value="${event.host.name}"/></p>
+	<p><b>Date:</b> <c:out value="${event.date}"/></p>
+	<p><b>Location:</b> <c:out value="${event.location}"/></p>
+	<p><b>Attendee:</b></p>
 	<ul>
 		<c:forEach items="${event.attendees}" var="attendee">
 		<li><c:out value="${attendee.name}"/></li>
 		</c:forEach>
 	</ul>
 	
-	<a href="/events/${event.id}/edit">Edit</a>
-	<p><a href="/events">Back to Event List</a></p>
+	<div class="mt-3">
+		<a class="btn btn-primary" href="/events/${event.id}/edit"><i class="far fa-edit"></i> Edit</a>
+		<a class="btn btn-secondary" href="/events"><i class="fas fa-arrow-left"></i> Back to Event List</a>
+	</div>
 	
 	</div>
 </div>
