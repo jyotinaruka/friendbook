@@ -10,8 +10,7 @@
 
 <div class="row">
 	<div class="col-sm-12">
-	<h1>Welcome, <c:out value="${user.name}"/>!</h1>
-	<h2>All events</h2>
+	<h1>All events</h1>
 	
 	<table class="table table-hover">
 	    <thead>
@@ -33,12 +32,12 @@
 				
 				<td class="text-center">
 					<c:choose>
-						<c:when test="${user == event.host}">
+						<c:when test="${loginUser.id == event.host.id}">
 							<a class="btn btn-sm btn-outline-primary" href="/events/${event.id}/edit"><i class="far fa-edit"></i> Edit</a> 
 							<a class="btn btn-sm btn-outline-danger" href="/events/${event.id}/delete"><i class="far fa-trash-alt"></i> Delete</a>
 						</c:when>
 						
-						<c:when test="${event.attendees.contains(user)}">
+						<c:when test="${event.attendees.contains(loginUser)}">
 							Joined <a class="btn btn-sm btn-outline-danger" href="/events/${event.id}/cancel"><i class="fas fa-user-minus"></i> Cancel</a>
 						</c:when>
 						

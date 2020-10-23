@@ -1,7 +1,5 @@
 package io.github.jyotinaruka.friendbook.controller;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -38,21 +36,6 @@ public class MainController {
     User u = userService.findUserById(userId);
     model.addAttribute("loginUser", u);
     model.addAttribute("allPosts", userService.allPosts());
-    model.addAttribute("allComments", userService.allComments());
-
-    SimpleDateFormat dateformat = new SimpleDateFormat(
-      "EEEE',' 'the' d 'of' MMMM',' yyyy"
-    );
-
-    String localDate = dateformat.format(new Date());
-
-    model.addAttribute("date", localDate);
-
-    SimpleDateFormat timeformat = new SimpleDateFormat("h:mm a");
-
-    String localTime = timeformat.format(new Date());
-    model.addAttribute("time", localTime);
-
     model.addAttribute(post);
     model.addAttribute("findAll", userService.findAll());
 
@@ -66,7 +49,11 @@ public class MainController {
     HttpSession session,
     Long id
   ) {
-    Long userId = (Long) session.getAttribute("user_id");
+	// check user_id in session, otherwise logout user
+	Long userId = (Long) session.getAttribute("user_id");
+	if (userId == null) {
+		return "redirect:/logout";
+	}
     User u = userService.findUserById(userId);
 
     if(post == null || post.trim().length() == 0) {
@@ -93,7 +80,11 @@ public class MainController {
     HttpSession session,
     @PathVariable("id") Long id
   ) {
-    Long userId = (Long) session.getAttribute("user_id");
+	// check user_id in session, otherwise logout user
+	Long userId = (Long) session.getAttribute("user_id");
+	if (userId == null) {
+		return "redirect:/logout";
+	}
     User u = userService.findUserById(userId);
 
     if(comment == null || comment.trim().length() == 0) {
@@ -111,8 +102,11 @@ public class MainController {
 
   @PostMapping("/like/{id}")
   public String like(Model model, HttpSession session, @PathVariable("id")Long id, @RequestParam(value="button")String button) {
-	  	Long userId= (Long) session.getAttribute("user_id");
-	  	User u = userService.findUserById(userId);
+		// check user_id in session, otherwise logout user
+		Long userId = (Long) session.getAttribute("user_id");
+		if (userId == null) {
+			return "redirect:/logout";
+		}
 	  	
 	  	Map<Long, Integer> likes = (Map<Long, Integer>) session.getAttribute("likes");
 	  	if(likes == null) {
@@ -129,11 +123,16 @@ public class MainController {
   }
 
   
-  @GetMapping("/delete/{id}")
-  public String delete(@PathVariable("id") Long id){
-	  userService.deleteAllCommentsByPostId(id);
-	  userService.deletePost(id);
-	  return "redirect:/home";
-  }
+	@GetMapping("/delete/{id}")
+	public String delete(@PathVariable("id") Long id, HttpSession session) {
+		// check user_id in session, otherwise logout user
+		Long userId = (Long) session.getAttribute("user_id");
+		if (userId == null) {
+			return "redirect:/logout";
+		}
+		userService.deleteAllCommentsByPostId(id);
+		userService.deletePost(id);
+		return "redirect:/home";
+	}
 
 }

@@ -32,25 +32,18 @@ public class EventsController {
     @ModelAttribute("event") Event event,
     HttpSession session
   ) {
-    //		if(session.getAttribute("userId") == null) {
-    //				return "redirect:/home";
-    //		}
+	// check user_id in session, otherwise logout user
+	Long userId = (Long) session.getAttribute("user_id");
+	if (userId == null) {
+		return "redirect:/logout";
+	}
+	User loginUser = userService.findUserById(userId);
+	model.addAttribute("loginUser", loginUser);
 
-    List<User> users = userService.findAll();
-    model.addAttribute("users", users);
     List<Event> events = eventService.allEvents();
     model.addAttribute("events", events);
 
-    Long userId = (Long) session.getAttribute("user_id");
-    User u = userService.findUserById(userId);
-    model.addAttribute("user", u);
-
     return "events.jsp";
-  }
-
-  @RequestMapping("/test")
-  public String test() {
-    return "test.jsp";
   }
 
   @RequestMapping("/events/new")
@@ -59,12 +52,13 @@ public class EventsController {
     Model model,
     HttpSession session
   ) {
-    //		  if(session.getAttribute("userId") == null) {
-    //				return "redirect:/home";
-    //			}
-
-    List<User> users = userService.findAll();
-    model.addAttribute("users", users);
+	// check user_id in session, otherwise logout user
+	Long userId = (Long) session.getAttribute("user_id");
+	if (userId == null) {
+		return "redirect:/logout";
+	}
+	User loginUser = userService.findUserById(userId);
+	model.addAttribute("loginUser", loginUser);
 
     return "newEvent.jsp";
   }
@@ -76,10 +70,15 @@ public class EventsController {
     HttpSession session,
     Model model
   ) {
+	// check user_id in session, otherwise logout user
+	Long userId = (Long) session.getAttribute("user_id");
+	if (userId == null) {
+		return "redirect:/logout";
+	}
+	User loginUser = userService.findUserById(userId);
+	model.addAttribute("loginUser", loginUser);
+	
     if (result.hasErrors()) {
-      List<User> users = userService.findAll();
-      model.addAttribute("users", users);
-
       return "newEvent.jsp";
     } else {
       User host = userService.findUserById(
@@ -98,9 +97,14 @@ public class EventsController {
     Model model,
     HttpSession session
   ) {
-    //			if(session.getAttribute("userId") ==null) {
-    //				return "redirect:/login";
-    //			}
+	// check user_id in session, otherwise logout user
+	Long userId = (Long) session.getAttribute("user_id");
+	if (userId == null) {
+		return "redirect:/logout";
+	}
+	User loginUser = userService.findUserById(userId);
+	model.addAttribute("loginUser", loginUser);
+	
     Event event = eventService.findEvent(id);
     model.addAttribute("event", event);
 
@@ -113,20 +117,15 @@ public class EventsController {
     Model model,
     HttpSession session
   ) {
-    //			if(session.getAttribute("userId") ==null) {
-    //				return "redirect:/home";
-    //			}
+	// check user_id in session, otherwise logout user
+	Long userId = (Long) session.getAttribute("user_id");
+	if (userId == null) {
+		return "redirect:/logout";
+	}
+	User loginUser = userService.findUserById(userId);
+	model.addAttribute("loginUser", loginUser);
 
-    //
     Event event = eventService.findEvent(id);
-    //			if(session.getAttribute("user_id") != event.getHost().getId()) {
-    //				return "redirect:/events";
-    //			}
-
-    List<User> users = userService.findAll();
-    model.addAttribute("users", users);
-
-    //			Event event = eventService.findEvent(id);
     model.addAttribute("event", event);
 
     return "editEvent.jsp";
@@ -140,12 +139,16 @@ public class EventsController {
     Model model,
     @PathVariable("id") Long id
   ) {
+	// check user_id in session, otherwise logout user
+	Long userId = (Long) session.getAttribute("user_id");
+	if (userId == null) {
+		return "redirect:/logout";
+	}
+	User loginUser = userService.findUserById(userId);
+	model.addAttribute("loginUser", loginUser);
+	
     if (result.hasErrors()) {
-      List<User> users = userService.findAll();
-      model.addAttribute("users", users);
-
       model.addAttribute("event", event);
-
       return "editEvent.jsp";
     } else {
       User host = userService.findUserById(
@@ -164,33 +167,33 @@ public class EventsController {
     @PathVariable("id") Long id,
     @ModelAttribute("event") Event event,
     HttpSession session,
-    BindingResult result
+    BindingResult result,
+    Model model
   ) {
-    //				User user = userService.findAll();
+	// check user_id in session, otherwise logout user
+	Long userId = (Long) session.getAttribute("user_id");
+	if (userId == null) {
+		return "redirect:/logout";
+	}
+	User loginUser = userService.findUserById(userId);
+	model.addAttribute("loginUser", loginUser);
+	
     Event e = eventService.findEvent(id);
     List<User> attendees = e.getAttendees();
-
-    User user = userService.findUserById(
-      (Long) session.getAttribute("user_id")
-    );
-    attendees.add(user);
-
+    attendees.add(loginUser);
     e.setAttendees(attendees);
-
     eventService.updateEvent(e);
-
-    //				userService.updateUser(user);
-
     return "redirect:/events";
   }
 
-  //		public String addProduct(@RequestParam("product") Long prodId, @PathVariable("id") Long id) {
-  //			Product product = prodService.findProduct(prodId);
-  //			product.addCategory(catService.findCategory(id));
-  //			prodService.updateProduct(product);
-
   @RequestMapping("/events/{id}/delete")
-  public String deleteEvent(@PathVariable("id") Long id) {
+  public String deleteEvent(@PathVariable("id") Long id, HttpSession session) {
+	// check user_id in session, otherwise logout user
+	Long userId = (Long) session.getAttribute("user_id");
+	if (userId == null) {
+		return "redirect:/logout";
+	}
+	
     eventService.deleteEvent(id);
     return "redirect:/events";
   }
@@ -199,15 +202,18 @@ public class EventsController {
   public String removeAttentee(@PathVariable("id") Long id, 
       @ModelAttribute("event") Event event, HttpSession session, BindingResult result){
 
-          Event e = eventService.findEvent(id);
-          List<User> attendees = e.getAttendees();
-
-          User user = userService.findUserById((Long) session.getAttribute("user_id"));
-          attendees.remove(user);
-
-          e.setAttendees(attendees);
-          eventService.updateEvent(e);
-
-          return "redirect:/events";
+	// check user_id in session, otherwise logout user
+	Long userId = (Long) session.getAttribute("user_id");
+	if (userId == null) {
+		return "redirect:/logout";
+	}
+	User loginUser = userService.findUserById(userId);
+	
+      Event e = eventService.findEvent(id);
+      List<User> attendees = e.getAttendees();
+      attendees.remove(loginUser);
+      e.setAttendees(attendees);
+      eventService.updateEvent(e);
+      return "redirect:/events";
   }
 }
