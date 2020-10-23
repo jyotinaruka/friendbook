@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Registration Page</title>
+<title>Friendbook - Registration Page</title>
 <link rel="stylesheet" href="/css/bootstrap.css" />
 <link rel="stylesheet" href="/css/style.css" />
 
@@ -19,7 +19,7 @@
 		<div id="bg-register" class="row rounded my-5">
 
 			<div class="col mx-2">
-				<div class="text-center">
+				<div class="text-center mt-2">
 					<img src="img/logo1.png" alt="" />
 				</div>
 				
