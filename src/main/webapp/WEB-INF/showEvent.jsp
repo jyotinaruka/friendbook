@@ -15,6 +15,12 @@
 	<p>Posted By: <c:out value="${event.host.name}"/>
 	<p>Date: <c:out value="${event.date}"/>
 	<p>Location: <c:out value="${event.location}"/>
+	<p>Attendee:</p>
+	<ul>
+		<c:forEach items="${event.attendees}" var="attendee">
+		<li><c:out value="${attendee.name}"/></li>
+		</c:forEach>
+	</ul>
 	
 	<a href="/events/${event.id}/edit">Edit</a>
 	<p><a href="/events">Back to Event List</a></p>
