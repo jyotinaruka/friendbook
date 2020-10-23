@@ -26,7 +26,7 @@
 			<c:forEach items="${events}" var="event">
 			<tr>
 				<td><a href="/events/${event.id}"><c:out value="${event.eventname}"/></a></td>
-				<td><c:out value="${event.date}"/></td>
+				<td><fmt:formatDate pattern="MMMM dd, yyyy" value="${event.date}" /></td>
 				<td><c:out value="${event.location}"/></td>
 				<td><c:out value="${event.host.name}"/></td>
 				
