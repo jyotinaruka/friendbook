@@ -92,11 +92,8 @@
 </div>
 
 
-<p>All Your Friends
-<p>
-	<c:forEach items="${users.findAll }">
-		<c:out value="${user.name }" />
-	</c:forEach>
+
+	
 
 
 	<%@include file="footer.jsp"%>
