@@ -27,7 +27,7 @@
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav ml-auto">
 					<li class="nav-item active"><a class="nav-link" href="/profile"><b>Welcome <c:out value="${loginUser.name}" /></b></a></li>
-					<li class="nav-item active"><a class="nav-link" href="/home">Home</a></li>
+					<li class="nav-item active"><a class="nav-link" href="/home"><i class="fas fa-home"></i> Home</a></li>
 					<li class="nav-item active"><a class="nav-link" href="/events">Events</a></li>
 					<li class="nav-item active"><a class="nav-link" href="/logout">Logout</a></li>
 				</ul>
